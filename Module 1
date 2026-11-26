@@ -1,0 +1,50 @@
+class Avion:
+    def __init__(self, immatriculation, modele, capacite, etat):
+        self.immatriculation = immatriculation
+        self.modele = modele
+        self.capacite = capacite
+        self.etat = etat
+        self.compagnie = "Cet avion n'appartient pas à une compagnie."
+    
+    
+    
+class Compagnie:
+    
+    listeCompagnie = []
+    
+    def __init__(self, nom, code, pays):
+        self.nom = nom
+        self.code = code
+        self.pays = pays
+        self.nbrAvion = 0
+        self.listeCompagnie.append(self.nom)
+        
+    def ajouterAvion(self, avion):
+        self.nbrAvion += 1
+        avion.compagnie = self.nom
+        
+    def supprimerAvion(self, avion):
+        self.nbrAvion -= 1
+        avion.compagnie = "Cet avion n'appartient pas à une compagnie."
+        
+    def __del__(self):
+        self.listeCompagnie.remove(self.nom)
+        
+            
+
+
+A1 = Avion("F-HBXA", "Airbus A380", 180, "En vol")
+print(A1.compagnie)
+
+
+AirFrance = Compagnie("AirFrance", "AF", "France")
+Ryanair = Compagnie("Ryanair", "FR", "Irlande")
+
+AirFrance.ajouterAvion(A1)
+print(Compagnie.listeCompagnie)
+print(AirFrance.nbrAvion)
+print(A1.compagnie)
+
+AirFrance.supprimerAvion(A1)
+del(AirFrance)
+print(Compagnie.listeCompagnie)
